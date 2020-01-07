@@ -11,11 +11,11 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag go-docker-test:$GITHUB_SHA
+      run: docker build . --file Dockerfile --tag go-docker-test
       
     - name: Tag
-      run: docker tag go-docker-test:$GITHUB_SHA docker.pkg.github.com/newfuture/go-docker/go-docker-test:$GITHUB_SHA
+      run: docker tag go-docker-test docker.pkg.github.com/newfuture/go-docker/go-docker-test:${GITHUB_SHA:7}
     - name: login
       run:  docker login -u $GITHUB_ACTOR -p ${{ secrets.GITHUB_TOKEN }} docker.pkg.github.com
     - name: Publish the Docker image
-      run: docker push docker.pkg.github.com/newfuture/go-docker/go-docker-test:$GITHUB_SHA
+      run: docker push docker.pkg.github.com/newfuture/go-docker/go-docker-test:${GITHUB_SHA:7}
