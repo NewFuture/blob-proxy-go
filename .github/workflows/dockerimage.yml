@@ -2,13 +2,12 @@ name: Docker Image CI
 
 on: [push]
 
-env:
-  IAMGE_VERSION:  ${GITHUB_SHA::7}
-
 jobs:
 
   build:
     runs-on: ubuntu-latest
+    env:
+      IAMGE_VERSION:  ${GITHUB_SHA::7}
 
     steps:
     - uses: actions/checkout@v1
