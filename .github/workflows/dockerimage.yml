@@ -7,7 +7,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      IAMGE_VERSION:  ${GITHUB_SHA::7}
+      IAMGE_VERSION: ${GITHUB_SHA::7}
 
     steps:
     - uses: actions/checkout@v1
