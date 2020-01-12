@@ -15,14 +15,14 @@ import (
 )
 
 func getEnv(key string, defaultValue string) (value string) {
-	value = os.Getenv("BLOB_HOST")
+	value = os.Getenv(key)
 	if value == "" {
 		value = defaultValue
 	}
 	return
 }
 func getEnvInt(key string, defaultValue int) (int, error) {
-	value := os.Getenv("BLOB_HOST")
+	value := os.Getenv(key)
 	if value == "" {
 		return defaultValue, nil
 	}
@@ -34,7 +34,7 @@ var basicDomainNum, _ = getEnvInt("BASIC_DOMAIN_NUM", 2)
 var defaultDocument = getEnv("DEFAULT_DOCUMENT", "index.html")
 
 // Host for blob
-var blobHost = getEnv("BLOB_HOST", "blob.core.windows.net")
+var blobHost = getEnv("BLOB_SUFFIX", "blob.core.windows.net")
 
 func parseURL(url *url.URL) (strURL string, err error) {
 	subDomains := strings.Split(url.Hostname(), ".")
