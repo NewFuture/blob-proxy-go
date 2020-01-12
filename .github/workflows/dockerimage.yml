@@ -18,7 +18,7 @@ jobs:
       if: startsWith(github.ref, 'refs/tags/')
       run: |
            docker tag blob-proxy-go docker.pkg.github.com/newfuture/blob-proxy-go/blob-proxy-go:${GITHUB_REF:10}
-           && docker tag blob-proxy-go docker.pkg.github.com/newfuture/blob-proxy-go/blob-proxy-go:latest
+           docker tag blob-proxy-go docker.pkg.github.com/newfuture/blob-proxy-go/blob-proxy-go:latest
 
     - name: login
       run:  docker login -u $GITHUB_ACTOR -p ${{ secrets.GITHUB_TOKEN }} docker.pkg.github.com
