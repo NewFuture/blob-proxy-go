@@ -1,12 +1,12 @@
 # blob-proxy-go
 
-### blob forward rules
+## blob forward rules
 
-`{SUBFOLDER}.{CONTAINER}.{STORAGE}.mydomain.com/xyz/` ==> `{STORAGE}.blob.core.windows.net/{CONTAINER}/{SUBFOLDER}/xyz/index.html`
-`{CONTAINER}.{STORAGE}.mydomain.com/xyz/` ==> `{STORAGE}.blob.core.windows.net/{CONTAINER}/xyz/index.html`
-`{STORAGE}.mydomain.com/xyz/` ==>  `{STORAGE}.blob.core.windows.net/xyz/index.html`
+* `{SUBFOLDER}.{CONTAINER}.{STORAGE}.mydomain.com/xyz/` ==> `{STORAGE}.blob.core.windows.net/{CONTAINER}/{SUBFOLDER}/xyz/index.html`
+* `{CONTAINER}.{STORAGE}.mydomain.com/xyz/` ==> `{STORAGE}.blob.core.windows.net/{CONTAINER}/xyz/index.html`
+* `{STORAGE}.mydomain.com/xyz/` ==>  `{STORAGE}.blob.core.windows.net/xyz/index.html`
 
-# configuration
+## configuration
 
 | Name | Default | comment |
 | :--- | :----: | ----: |
