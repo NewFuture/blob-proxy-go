@@ -19,4 +19,4 @@
 
 [blob-proxy-go](https://github.com/NewFuture/blob-proxy-go/packages/102924)
 
-<!-- `docker pull docker.pkg.github.com/newfuture/blob-proxy-go/blob-proxy-go` -->
+`docker pull docker.pkg.github.com/newfuture/blob-proxy-go/blob-proxy-go`
