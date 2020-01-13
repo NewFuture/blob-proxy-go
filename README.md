@@ -19,4 +19,10 @@
 
 [blob-proxy-go](https://github.com/NewFuture/blob-proxy-go/packages/102924)
 
+* stable
+
 `docker pull docker.pkg.github.com/newfuture/blob-proxy-go/blob-proxy-go`
+
+* for beta
+
+`docker pull newfuture/blob-proxy-go:beta`
