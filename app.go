@@ -46,29 +46,25 @@ func revesre(a []string) {
 }
 func parseURL(url *url.URL) (strURL string, err error) {
 	subDomains := strings.Split(url.Hostname(), ".")
-	length := len(subDomains)
 	var storageInfo []string
 	if basicDomainNum <= 0 {
 		storageInfo = strings.Split(subDomains[0], splitKey)
-	} else if length <= basicDomainNum {
+	} else if len(subDomains) <= basicDomainNum {
 		err = http.ErrNotSupported
 		return
 	} else {
 		// 域名倒装
-		storageInfo = subDomains[:length-basicDomainNum]
+		storageInfo = subDomains[:len(subDomains)-basicDomainNum]
 		revesre(storageInfo)
 	}
 
-	length = len(subDomains)
-	blob := storageInfo[length-1]
 	var sb strings.Builder
-
 	if !forceHTTPS && url.Scheme != "" {
 		sb.WriteString(url.Scheme)
 	} else {
 		sb.WriteString("https://")
 	}
-	sb.WriteString(blob)
+	sb.WriteString(storageInfo[0]) // blob
 	sb.WriteByte('.')
 	storageInfo[0] = blobHost
 	sb.WriteString(strings.Join(storageInfo, "/"))
@@ -105,6 +101,7 @@ func doGo(w http.ResponseWriter, r *http.Request) {
 		log.Print(err.Error())
 		return
 	}
+	log.Print(url)
 	req, err := http.NewRequest(r.Method, url, r.Body)
 	if err != nil {
 		w.WriteHeader(500)
