@@ -30,40 +30,48 @@ func getEnvInt(key string, defaultValue int) (int, error) {
 }
 
 var serverPort, _ = getEnvInt("PORT", 80)
-var basicDomainNum, _ = getEnvInt("BASIC_DOMAIN_NUM", 2)
+var basicDomainNum, _ = getEnvInt("BASIC_DOMAIN_NUM", 0)
+var splitKey = getEnv("SPLIT_KEY", "--")
+var forceHTTPS, _ = strconv.ParseBool(getEnv("FORCE_HTTPS", "true"))
 var defaultDocument = getEnv("DEFAULT_DOCUMENT", "index.html")
 
 // Host for blob
 var blobHost = getEnv("BLOB_SUFFIX", "blob.core.windows.net")
 
+func revesre(a []string) {
+	for i := len(a)/2 - 1; i >= 0; i-- {
+		opp := len(a) - 1 - i
+		a[i], a[opp] = a[opp], a[i]
+	}
+}
 func parseURL(url *url.URL) (strURL string, err error) {
 	subDomains := strings.Split(url.Hostname(), ".")
 	length := len(subDomains)
-	if length <= basicDomainNum {
+	var storageInfo []string
+	if basicDomainNum <= 0 {
+		storageInfo = strings.Split(subDomains[0], splitKey)
+	} else if length <= basicDomainNum {
 		err = http.ErrNotSupported
 		return
+	} else {
+		// 域名倒装
+		storageInfo = subDomains[:length-basicDomainNum]
+		revesre(storageInfo)
 	}
-	subDomains = subDomains[:length-basicDomainNum]
+
 	length = len(subDomains)
-	blob := subDomains[length-1]
+	blob := storageInfo[length-1]
 	var sb strings.Builder
-	if url.Scheme != "" {
+
+	if !forceHTTPS && url.Scheme != "" {
 		sb.WriteString(url.Scheme)
 	} else {
 		sb.WriteString("https://")
 	}
 	sb.WriteString(blob)
 	sb.WriteByte('.')
-	sb.WriteString(blobHost)
-	//前缀
-	if length > 1 {
-		sb.WriteByte('/')
-		sb.WriteString(subDomains[length-2])
-		for _, prefix := range subDomains[:length-2] {
-			sb.WriteByte('/')
-			sb.WriteString(prefix)
-		}
-	}
+	storageInfo[0] = blobHost
+	sb.WriteString(strings.Join(storageInfo, "/"))
 	sb.WriteString(url.Path)
 	// 自动补全默认文档
 	if strings.HasSuffix(url.Path, "/") {
