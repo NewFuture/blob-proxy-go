@@ -4,7 +4,7 @@
 
 ### single level subdomian
 
-`{STORAGE}--{COTANINER}--{SUBFOLDER}.my-proxy.com/xyz` ==> `{STORAGE}.blob.core.windows.net/{CONTAINER}/{SUBFOLDER}/xyz/index.html`
+`{STORAGE}--{COTANINER}--{SUBFOLDER}.my-proxy.com/xyz/` ==> `{STORAGE}.blob.core.windows.net/{CONTAINER}/{SUBFOLDER}/xyz/index.html`
 
 ### muti-level subdomain
 * `{SUBFOLDER}.{CONTAINER}.{STORAGE}.mydomain.com/xyz/` ==> `{STORAGE}.blob.core.windows.net/{CONTAINER}/{SUBFOLDER}/xyz/index.html`
