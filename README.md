@@ -17,9 +17,7 @@
 | :--- | :----: | :---- |
 | `BLOB_SUFFIX` | `blob.core.windows.net` | suffix domain for blob |
 | `DEFAULT_DOCUMENT` | `index.html` | append default file when list folder  |
-
 | `FORCE_HTTPS` | `true` | using https connect to upstream |
-
 | `SPLIT_KEY` | `--` | using one single level subdaomin as {STORAGE}--{COTANINER}--{SUBFOLDER}--{SubSUBFOLDER}.my-proxy.com|
 | `BASIC_DOMAIN_NUM` | 0 | when set will ignore `split_key`|
 
