@@ -64,7 +64,7 @@ func doProxy(w http.ResponseWriter, r *http.Request) {
 	var err error
 	if strings.HasSuffix(r.URL.Hostname(), httpProxyFrontend) {
 		log.Print("http", r.URL)
-		res, err = httpProxy.Proxy(r)
+		res, err = httpProxy.HTTPProxy(r)
 	} else {
 		log.Print("blob", r.URL)
 		res, err = blobProxy.Proxy(r)

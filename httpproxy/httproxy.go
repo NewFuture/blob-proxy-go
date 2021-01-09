@@ -11,8 +11,8 @@ type Httpproxy struct {
 	BackendHost string
 }
 
-// Proxy proxy http request to backend url
-func (p *Httpproxy) Proxy(r *http.Request) (res *http.Response, err error) {
+// HTTPProxy proxy http request to backend url
+func (p *Httpproxy) HTTPProxy(r *http.Request) (res *http.Response, err error) {
 	url := CovertHTTPURL(r.URL, p.BackendHost, "http")
 	req, err := http.NewRequest(r.Method, url, r.Body)
 	if err != nil {
@@ -23,7 +23,8 @@ func (p *Httpproxy) Proxy(r *http.Request) (res *http.Response, err error) {
 		}
 		return res, err
 	}
-	req.Header = *(CreateProxyRequestHeader(r))
+	req.Header = *CreateProxyRequestHeader(r)
+	req.Host = r.Host
 	httpClient := &http.Client{}
 	res, err = httpClient.Do(req)
 	if err != nil {

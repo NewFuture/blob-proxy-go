@@ -36,5 +36,6 @@ func CreateProxyRequestHeader(r *http.Request) *http.Header {
 			requestHeader.Set("X-Forwarded-Proto", "http")
 		}
 	}
+	requestHeader.Set("Host", r.Host)
 	return requestHeader
 }
