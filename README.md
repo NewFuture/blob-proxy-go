@@ -20,6 +20,8 @@
 | `FORCE_HTTPS` | `true` | using https connect to upstream |
 | `SPLIT_KEY` | `--` | using one single level subdaomin as {STORAGE}--{COTANINER}--{SUBFOLDER}--{SubSUBFOLDER}.my-proxy.com|
 | `BASIC_DOMAIN_NUM` | 0 | when set will ignore `split_key`|
+| `HTTP_PROXY_FRONT_DOMAIN` | | set http_proxy_domain suffix |
+| `HTTP_PROXY_BACKEND` | `localhost:3000` | set HTTP_PROXY_BACKEND host |
 
 
 # docker support
