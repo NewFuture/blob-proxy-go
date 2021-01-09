@@ -1,8 +1,7 @@
 # build stage
 FROM golang:alpine AS builder
 RUN apk --no-cache add build-base git gcc ca-certificates
-COPY app.go /src/
-RUN go get -d -v ./...
+COPY . /src/
 RUN cd /src && go build -o app
 
 # final stage
